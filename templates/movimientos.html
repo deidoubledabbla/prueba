@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Movimientos</h2>
+<form method="POST" class="row g-3 mb-4">
+    <div class="col-md-3">
+        <label>Producto:</label>
+        <select name="producto_id" class="form-control">
+            {% for p in productos %}
+                <option value="{{ p.id }}">{{ p.nombre }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col-md-2">
+        <label>Tipo:</label>
+        <select name="tipo" class="form-control">
+            <option value="entrada">Entrada</option>
+            <option value="salida">Salida</option>
+        </select>
+    </div>
+    <div class="col-md-2">
+        <label>Cantidad:</label>
+        <input type="number" name="cantidad" class="form-control" required>
+    </div>
+    <div class="col-md-4">
+        <label>Descripción:</label>
+        <input type="text" name="descripcion" class="form-control">
+    </div>
+    <div class="col-md-1 align-self-end">
+        <button class="btn btn-primary">Guardar</button>
+    </div>
+</form>
+
+<h4>Historial</h4>
+<table class="table table-sm table-striped">
+    <thead>
+        <tr><th>Producto</th><th>Tipo</th><th>Cantidad</th><th>Fecha</th><th>Descripción</th></tr>
+    </thead>
+    <tbody>
+        {% for m in movimientos %}
+        <tr>
+            <td>{{ m.producto }}</td>
+            <td>{{ m.tipo }}</td>
+            <td>{{ m.cantidad }}</td>
+            <td>{{ m.fecha }}</td>
+            <td>{{ m.descripcion }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
